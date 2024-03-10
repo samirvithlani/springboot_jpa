@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.bean.EmployeeBean;
@@ -30,17 +31,22 @@ public class EmployeeController {
 		return new ResponseEntity<Object>(null, HttpStatus.OK);
 
 	}
-	
+
 	@PostMapping("/employee")
-	public ResponseEntity<?> createEmployee(@RequestBody EmployeeBean employeeBean){
-		
-		
+	public ResponseEntity<?> createEmployee(@RequestBody EmployeeBean employeeBean) {
+
 		int res = employeeDao.addEmployee(employeeBean);
-		
-			
-			return new ResponseEntity<String>("employee Added", HttpStatus.OK);
-		
-		
-		
+
+		return new ResponseEntity<String>("employee Added", HttpStatus.OK);
+
 	}
+
+	@PutMapping("/employee")
+	public ResponseEntity<?> updateEmployee(@RequestBody EmployeeBean employeeBean) {
+
+		employeeDao.updateEmployee(employeeBean);
+
+		return new ResponseEntity<String>("employee updated", HttpStatus.OK);
+	}
+
 }
